@@ -1,8 +1,10 @@
-package com.personmanager.manager.domain.dto;
+package com.personmanager.manager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.personmanager.manager.domain.audit.UserDateAudit;
 import com.personmanager.manager.util.DateVerifier;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -35,7 +37,9 @@ public class Person extends UserDateAudit {
     @Column(name = "BIRTH_DATE", nullable = false)
     private Date birthDate;
 
+    @CPF
     @Size(max = 11, min = 11)
+    @NotNull
     @Column(name = "CPF", length = 11, unique = true, nullable = false)
     private String cpf;
 
