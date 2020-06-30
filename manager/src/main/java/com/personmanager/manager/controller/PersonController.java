@@ -1,0 +1,11 @@
+package com.personmanager.manager.controller;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/v1/person")
+public class PersonController implements MVCController{
+}

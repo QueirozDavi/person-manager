@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/person_manager?useTimezone=true&serverTimezone=UTC
+
+    username: root
+    password: root
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    application:
+      name: travel-manager-api
+
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      ddl-auto: update
+
+server:
+  port: 8080
+
+jwt:
+  secret: personManager_KeyJWT@20203006
+  # 1 DAY
+  expirationInMs: 86400000
+
+# 30 MINUTES
+# expirationInMs = 1800000
+# 1 MINUTE
+# expirationInMs = 60000
