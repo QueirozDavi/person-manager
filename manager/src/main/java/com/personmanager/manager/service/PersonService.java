@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import static com.personmanager.manager.util.Constants.*;
+
 @Service
 public class PersonService {
 
@@ -31,26 +33,26 @@ public class PersonService {
     public Person createPerson(PersonDTO personDTO) {
 
         if(repository.existsByCpf(personDTO.getCpf()))
-            throw new BadRequestException("This CPF already used.");
+            throw new BadRequestException(CPF_ALREADY_USED_ERROR_MESSAGE);
 
         dateVerifier.verifyDate(personDTO.getBirthDate());
 
-        return repository.save(mapper.map(personDTO, Person.class));
+         return repository.save(mapper.map(personDTO, Person.class));
     }
 
     public Person updatePerson(Long id, Person person) {
 
         if (id.equals(person.getId()))
-            throw new ForbiddenException("Id parameter must be the same id of person request body.");
+            throw new ForbiddenException(UPDATE_ID_PARAMETER_DIFFERENT_ERROR_MESSAGE);
 
         if (repository.existsById(person.getId()))
             return repository.save(person);
         else
-            throw new NotFoundException("Person not found");
+            throw new NotFoundException(PERSON_NOT_FOUND_ERROR_MESSAGE);
     }
 
     public Person getPersonById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Person not found"));
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(PERSON_NOT_FOUND_ERROR_MESSAGE));
     }
 
     public Page<Person> getPersons(String name, Pageable pageable) {
@@ -59,10 +61,10 @@ public class PersonService {
 
     public void deletePerson(Long id) {
 
-        if (repository.existsById(id))
-            repository.deleteById(id);
-        else
-            throw new NotFoundException("Person not found");
+        if (!repository.existsById(id))
+            throw new NotFoundException(PERSON_NOT_FOUND_ERROR_MESSAGE);
+
+        repository.deleteById(id);
     }
 
 }

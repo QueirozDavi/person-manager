@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.personmanager.manager.util.Constants.DATE_VERIFIER_BAD_REQUEST_MESSAGE;
+
 @NoArgsConstructor
 public class DateVerifier {
 
@@ -20,7 +22,7 @@ public class DateVerifier {
             format.parse(dateStr);
             return true;
         } catch (ParseException e) {
-            throw new BadRequestException("Error: the date pattern must be: dd/MM/yyyy .");
+            throw new BadRequestException(DATE_VERIFIER_BAD_REQUEST_MESSAGE);
         }
 
     }
