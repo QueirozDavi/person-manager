@@ -1,6 +1,7 @@
 package com.personmanager.manager.controller;
 
 import com.personmanager.manager.domain.Person;
+import com.personmanager.manager.domain.dto.PersonDTO;
 import com.personmanager.manager.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,8 +34,8 @@ public class PersonController implements MVCController{
     }
 
     @PostMapping
-    public Person createPerson(@Valid @RequestBody Person person) {
-        return service.createPerson(person);
+    public Person createPerson(@Valid @RequestBody PersonDTO personDTO) {
+        return service.createPerson(personDTO);
     }
 
     @PutMapping("{/id}")

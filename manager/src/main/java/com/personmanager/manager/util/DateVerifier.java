@@ -3,6 +3,7 @@ package com.personmanager.manager.util;
 import com.personmanager.manager.exception.BadRequestException;
 import lombok.NoArgsConstructor;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,18 +11,17 @@ import java.util.Date;
 @NoArgsConstructor
 public class DateVerifier {
 
-    public Date verifyDate(Date date) {
+    public boolean verifyDate(String dateStr) {
 
-        String textDate = date.toString();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
 
         try {
-            format.setLenient(false);
-            date = format.parse(textDate);
+            format.parse(dateStr);
+            return true;
         } catch (ParseException e) {
             throw new BadRequestException("Error: the date pattern must be: dd/MM/yyyy .");
         }
 
-        return date;
     }
 }

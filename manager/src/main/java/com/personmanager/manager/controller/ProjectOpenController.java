@@ -8,7 +8,7 @@ import static com.personmanager.manager.util.Constants.*;
 
 @RestController
 @RequestMapping("/v1/public/")
-public class OpenController implements MVCController{
+public class ProjectOpenController implements MVCController{
 
     @GetMapping("/project-repository")
     public String getProjectRepository() {
@@ -20,7 +20,7 @@ public class OpenController implements MVCController{
         return SWAGGER_API_URL;
     }
 
-    @GetMapping("/project-repository")
+    @GetMapping("/swagger-api-docs")
     public String getProjectSwaggerApiDocsUrl() {
         return SWAGGER_API_DOCS_URL;
     }
